@@ -1,0 +1,63 @@
+Running main() from E:\ndk\native\build-host\_deps\googletest-src\googletest\src\gtest_main.cc
+[==========] Running 21 tests from 5 test suites.
+[----------] Global test environment set-up.
+[----------] 6 tests from DbCalculatorTest
+[ RUN      ] DbCalculatorTest.FullScaleDcIsZeroDbfs
+[       OK ] DbCalculatorTest.FullScaleDcIsZeroDbfs (0 ms)
+[ RUN      ] DbCalculatorTest.TenthScaleDcIsMinus20Dbfs
+[       OK ] DbCalculatorTest.TenthScaleDcIsMinus20Dbfs (0 ms)
+[ RUN      ] DbCalculatorTest.SilenceIsFloor
+[       OK ] DbCalculatorTest.SilenceIsFloor (0 ms)
+[ RUN      ] DbCalculatorTest.FullScaleSquareIsZeroDbfs
+[       OK ] DbCalculatorTest.FullScaleSquareIsZeroDbfs (0 ms)
+[ RUN      ] DbCalculatorTest.NullOrEmptyIsFloor
+[       OK ] DbCalculatorTest.NullOrEmptyIsFloor (0 ms)
+[ RUN      ] DbCalculatorTest.FullScaleSineIsMinus3Dbfs
+[       OK ] DbCalculatorTest.FullScaleSineIsMinus3Dbfs (0 ms)
+[----------] 6 tests from DbCalculatorTest (2 ms total)
+
+[----------] 5 tests from DbWindowAccumulatorTest
+[ RUN      ] DbWindowAccumulatorTest.SingleWindowDc
+[       OK ] DbWindowAccumulatorTest.SingleWindowDc (0 ms)
+[ RUN      ] DbWindowAccumulatorTest.SilenceWindow
+[       OK ] DbWindowAccumulatorTest.SilenceWindow (0 ms)
+[ RUN      ] DbWindowAccumulatorTest.VariableChunkEquivalence
+[       OK ] DbWindowAccumulatorTest.VariableChunkEquivalence (0 ms)
+[ RUN      ] DbWindowAccumulatorTest.MultiWindowSinglePush
+[       OK ] DbWindowAccumulatorTest.MultiWindowSinglePush (0 ms)
+[ RUN      ] DbWindowAccumulatorTest.ResetClearsCarry
+[       OK ] DbWindowAccumulatorTest.ResetClearsCarry (0 ms)
+[----------] 5 tests from DbWindowAccumulatorTest (0 ms total)
+
+[----------] 5 tests from RingBufferTest
+[ RUN      ] RingBufferTest.BasicSnapshotInOrder
+[       OK ] RingBufferTest.BasicSnapshotInOrder (0 ms)
+[ RUN      ] RingBufferTest.OverflowKeepsRecent
+[       OK ] RingBufferTest.OverflowKeepsRecent (0 ms)
+[ RUN      ] RingBufferTest.IncrementalWrapAround
+[       OK ] RingBufferTest.IncrementalWrapAround (0 ms)
+[ RUN      ] RingBufferTest.SnapshotFewerThanSize
+[       OK ] RingBufferTest.SnapshotFewerThanSize (0 ms)
+[ RUN      ] RingBufferTest.EmptySnapshot
+[       OK ] RingBufferTest.EmptySnapshot (0 ms)
+[----------] 5 tests from RingBufferTest (0 ms total)
+
+[----------] 3 tests from SpscQueueTest
+[ RUN      ] SpscQueueTest.PushPopOrder
+[       OK ] SpscQueueTest.PushPopOrder (0 ms)
+[ RUN      ] SpscQueueTest.FullDrops
+[       OK ] SpscQueueTest.FullDrops (0 ms)
+[ RUN      ] SpscQueueTest.ThreadedNoLossInOrder
+[       OK ] SpscQueueTest.ThreadedNoLossInOrder (10 ms)
+[----------] 3 tests from SpscQueueTest (10 ms total)
+
+[----------] 2 tests from WavWriterTest
+[ RUN      ] WavWriterTest.HeaderAndDataSize
+[       OK ] WavWriterTest.HeaderAndDataSize (7 ms)
+[ RUN      ] WavWriterTest.RejectsBadArgs
+[       OK ] WavWriterTest.RejectsBadArgs (0 ms)
+[----------] 2 tests from WavWriterTest (7 ms total)
+
+[----------] Global test environment tear-down
+[==========] 21 tests from 5 test suites ran. (21 ms total)
+[  PASSED  ] 21 tests.

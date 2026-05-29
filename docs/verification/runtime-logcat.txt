@@ -1,0 +1,4 @@
+﻿05-29 19:51:52.545 12790 12790 I ndk_audio: stream opened: rate=48000 sharing=1 perf=10 backend=2
+05-29 19:51:52.548 12790 12790 I ndk_audio: engine started (threshold=-32.0 dBFS)
+05-29 19:52:02.184 12790 13062 I ndk_audio: event WAV /storage/emulated/0/Android/data/com.example.noise_meter/files/event_000.wav: saved (462000 samples)
+05-29 19:52:03.615 12790 12790 I ndk_audio: engine stopped: framesProcessed=3953520 triggers=35 filesWritten=1

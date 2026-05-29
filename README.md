@@ -8,10 +8,19 @@ Android **NDK C/C++** 로 마이크 Raw Audio를 실시간 캡처하고, **Oboe*
 
 ## 📸 스크린샷
 
-| Flutter 앱 (NDK 측정) | 모니터링 웹 (React) |
+### Flutter 앱 (NDK 측정)
+
+| 메인 (측정 중) | 이벤트 감지 (임계 초과) | 마이크 권한 요청 |
+|---|---|---|
+| <img src="docs/screenshots/01-app-main.png" width="240"> | <img src="docs/screenshots/03-app-event-detected.png" width="240"> | <img src="docs/screenshots/04-app-permission.png" width="240"> |
+| 실시간 dBFS 게이지 · 임계 슬라이더 · 이벤트 WAV 목록(재생) · 기기 내장 서버 주소 | dBFS가 임계 초과 시 게이지 적색 + 전후 구간 WAV 자동 저장 | RECORD_AUDIO 런타임 권한(granted 후에만 캡처 시작) |
+
+### 모니터링 웹 (React, 같은 WiFi에서 접속)
+
+| 실시간 모니터링 + 원격 제어 | 이벤트 목록 + WAV 스트리밍 재생 |
 |---|---|
-| <img src="docs/screenshots/01-app-main.png" width="280"> | <img src="docs/screenshots/02-monitor-web.png" width="280"> |
-| 실시간 dBFS 게이지 · 임계 슬라이더 · 이벤트 WAV 목록(재생) · 기기 내장 서버 주소 | 같은 WiFi 접속 → 실시간 폴링 · 원격 제어 · 이벤트 WAV 스트리밍 재생 |
+| <img src="docs/screenshots/05-monitor-web-top.png" width="360"> | <img src="docs/screenshots/02-monitor-web.png" width="300"> |
+| 1초 폴링 dBFS 게이지 · 측정 상태 · 일시정지/재개 · 원격 임계 | 저장된 이벤트 WAV 목록 + 각 항목 `<audio>` 스트리밍 재생 |
 
 ---
 
@@ -97,6 +106,8 @@ cmake --build native/build-host
 | dB 콜백 | NativeCallable.listener로 UI에 ~8Hz dBFS 전달 |
 | 이벤트 WAV | `event_000.wav` — **48000Hz / mono / 16bit**, 전후 구간 정상 저장 |
 | 메모리 안정성 | 60초 반복 트리거(워커/저장 부하), Native Heap 증가 **+44KB**(<5MB), 크래시 0 |
+
+> **검증 로그(원문):** [`docs/verification/host-gtest.txt`](docs/verification/host-gtest.txt) (gtest 21개 통과) · [`docs/verification/runtime-logcat.txt`](docs/verification/runtime-logcat.txt) (`stream opened: rate=48000 backend=AAudio` + `event WAV saved` + `framesProcessed=... triggers=... filesWritten=...`)
 
 ### 30분 장시간 안정성 측정 절차 (수동 권장)
 ```bash
