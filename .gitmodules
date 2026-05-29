@@ -1,0 +1,3 @@
+[submodule "third_party/oboe"]
+	path = third_party/oboe
+	url = https://github.com/google/oboe

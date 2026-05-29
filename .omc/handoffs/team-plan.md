@@ -1,0 +1,25 @@
+## Handoff: team-plan → team-exec
+
+- **Decided**:
+  - 승인된 RALPLAN 계획 `.omc/plans/ndk-oboe-ffi-demo.md`(iteration 3, Critic APPROVE) 구현. 모든 워커는 착수 전 이 계획서를 정독한다.
+  - 환경 부트스트랩 게이트 **통과**(lead가 직접 처리): git init 완료, ANDROID_HOME=`C:\Users\PC\AppData\Local\Android\Sdk` 설정(세션+User 영구).
+  - **재사용 AVD = `PlateScan_API_29`** (x86_64, google_apis, `hw.audioInput=yes` 마이크 ON). 신규 AVD 생성 불필요. 계획 요구(API26+ x86_64 + 마이크) 충족(API29≥26).
+  - NDK `28.2.13676358`(r28), CMake `3.22.1`, build-tools 34~36, adb/emulator 완비.
+  - **빌드 검증 가능 환경** → AC는 코드리뷰가 아니라 실제 빌드/gtest/에뮬레이터 실행으로 검증.
+- **Rejected**:
+  - 신규 AVD 생성(기존 PlateScan_API_29가 조건 충족) / platforms;android-26 설치(compileSdk는 설치된 34~36 사용, minSdk만 26).
+  - native-assets(A안) primary(계획 ADR대로 소스 add_subdirectory primary, A는 Day6 선택 스파이크).
+- **Risks (워커가 해결)**:
+  - **호스트 gtest 컴파일러**: cl/clang/ninja가 PATH에 없음. VS BuildTools 2019 존재 → 워커가 `vcvars64.bat` 활성화 + SDK의 `cmake\3.22.1\bin\ninja.exe` 사용. (Day1-AM/Day3/Day4 호스트 테스트 전제)
+  - **48000Hz 강제**: 에뮬레이터 Input이 48000을 거부하면 start 거부(M3). Day2에서 `getSampleRate()==48000` Go/No-Go 조기 검증.
+  - **Oboe 소스 빌드**: submodule 버전 태그 고정 + `--recursive` 클론. STL `c++_shared` 필수.
+  - 강한 선형 의존(#1→#2→#3→#4→#5→#6) → #1(골격) 완료 전 병렬 spawn 금지.
+- **Files**: `.omc/plans/ndk-oboe-ffi-demo.md`(스펙), `.omc/plans/open-questions.md`
+- **Remaining (team-exec task graph)**:
+  - #1 프로젝트 골격 + Phase0 빌드 게이트(Oboe 링크 .so + engine_ping + 호스트 gtest 인프라) — 뿌리, 단일 선행
+  - #2 네이티브 순수 로직(DbCalculator+DbWindowAccumulator / RingBuffer+SPSC / WAV writer) + 호스트 gtest [blockedBy #1]
+  - #3 Oboe 캡처 + 엔진 통합 + EventDetector + 저장 워커 상태머신(IDLE/CAPTURING/병합/stop finalize) [blockedBy #1,#2]
+  - #4 Dart FFI(export 4함수 + NativeCallable.listener 125ms throttle + RECORD_AUDIO 권한) [blockedBy #1,#3]
+  - #5 Flutter UI(게이지/슬라이더/이벤트로그/WAV재생) [blockedBy #4]
+  - #6 30분 안정성(반복트리거+dumpsys<5MB+ASan) + README(4포인트+한계+submodule --recursive) [blockedBy #5]
+  - 핵심 불변식: 콜백=누산+큐push만, RingBuffer는 워커 단독 소유(C4-R), sumSq 러닝합, 구형/DC gtest, 소스 add_subdirectory.

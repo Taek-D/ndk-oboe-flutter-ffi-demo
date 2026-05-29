@@ -1,0 +1,36 @@
+# 호스트 네이티브 빌드 산출물
+native/build-host/
+native/build/
+
+# Android/Gradle
+app/android/.gradle/
+app/android/app/.cxx/
+app/build/
+**/build/
+
+# Flutter/Dart
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# OMC/세션 상태(공유 불필요)
+.omc/state/
+.omc/logs/
+
+# bkit 플러그인 세션 흔적
+.bkit/
+
+# 모니터링 웹 빌드 산출물(monitor-web/.gitignore가 처리하지만 명시)
+monitor-web/node_modules/
+monitor-web/dist/
