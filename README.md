@@ -6,6 +6,15 @@ Android **NDK C/C++** 로 마이크 Raw Audio를 실시간 캡처하고, **Oboe*
 
 ---
 
+## 📸 스크린샷
+
+| Flutter 앱 (NDK 측정) | 모니터링 웹 (React) |
+|---|---|
+| <img src="docs/screenshots/01-app-main.png" width="280"> | <img src="docs/screenshots/02-monitor-web.png" width="280"> |
+| 실시간 dBFS 게이지 · 임계 슬라이더 · 이벤트 WAV 목록(재생) · 기기 내장 서버 주소 | 같은 WiFi 접속 → 실시간 폴링 · 원격 제어 · 이벤트 WAV 스트리밍 재생 |
+
+---
+
 ## ⏱ 30초 검증 4포인트
 
 처음 보는 사람이 30초 안에 핵심 역량을 확인할 수 있는 코드 위치입니다.
@@ -123,7 +132,7 @@ cd monitor-web && npm install && npm run dev   # http://localhost:5173
 | `GET /api/status` | `{running:true, db:-78.4, threshold, eventCount}` (curl + React 1초 폴링) |
 | `POST /api/pause` / `/api/resume` | `running:false` / `running:true` (원격 제어) |
 | `GET /api/audio/<name>` | **HTTP 206 Partial Content**, `audio/wav`, `Accept-Ranges: bytes` |
-| React 웹 E2E | 실시간 dB 게이지·상태·원격 제어 동작 — [monitor-web-e2e.png](monitor-web-e2e.png) |
+| React 웹 E2E | 실시간 dB 게이지·상태·원격 제어 동작 — [docs/screenshots/02-monitor-web.png](docs/screenshots/02-monitor-web.png) |
 
 > 참고: 로컬 서버는 데모 범위로 인증이 없습니다(동일 LAN 가정). 실제 배포 시 토큰/페어링 추가 필요.
 
